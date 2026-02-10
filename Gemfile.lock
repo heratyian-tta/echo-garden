@@ -523,6 +523,7 @@ DEPENDENCIES
   dotenv
   draft_generators (~> 0.0.5)
   faker
+  faraday
   grade_runner (~> 0.0.13)
   haikunator
   htmlbeautifier
