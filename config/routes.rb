@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   # get("/your_first_screen", { :controller => "pages", :action => "first" })
 
   root to: "home#index"
+
+  resources :locations, only: [:index] do
+    get :cities, on: :collection
+  end
 end
