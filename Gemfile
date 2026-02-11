@@ -25,12 +25,13 @@ gem "http"                            # Simple HTTP client for APIs
 gem "rollbar"                         # Error tracking in production
 gem "appdev_support"                  # Learning helpers (nicer error messages, etc.)
 gem "ai-chat", "~> 0.5.4"             # AI::Chat integration via OpenAI APIs
+gem 'whenever', require: false        # Cron job scheduling (for running periodic tasks like imports)
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows], require: "debug/prelude" # Ruby debugger
   gem "rspec-rails", "~> 7.1.1"       # Testing framework
   gem "grade_runner", "~> 0.0.13"     # Automated grading
-  gem "faraday"                       # HTTP client library
+ 
 end
 
 group :development do
