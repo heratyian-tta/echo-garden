@@ -3,6 +3,7 @@
 # Table name: locations
 #
 #  id                :bigint           not null, primary key
+#  active            :boolean
 #  city              :string
 #  country           :string           not null
 #  province          :string           not null

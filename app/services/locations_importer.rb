@@ -7,6 +7,8 @@ class LocationsImporter
   COUNTRY_CODE = "US"
 
   def self.call
+    Location.all.update_all(active: false)
+    
     states = get_request("#{BASE_URL}/countries/#{COUNTRY_CODE}/states")
 
     states.each do |state|
@@ -21,6 +23,8 @@ class LocationsImporter
           province: state_name,
           city: city["name"],
         )
+
+        location.active = true
 
         location.unique_identifier = Location.generate_unique_identifier("US", state_code, city["name"])
         location.save!
