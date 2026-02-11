@@ -47,6 +47,7 @@ group :development do
   gem "rails-erd"                     # Generate ER diagrams
   gem "rufo"                          # Ruby code formatter
   gem "web-console"                   # Console on exception pages
+  gem "dotenv-rails"                  # Load .env files in development
 end
 
 group :test do
