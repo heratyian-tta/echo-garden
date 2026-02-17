@@ -25,3 +25,11 @@ set :output, "log/cron.log"
 every 1.year, at: '2:00 am' do
   runner "LocationsImportJob.perform_later"
 end
+
+set :output, "log/cron.log"
+env :PATH, ENV['PATH']
+
+# Run every 6 minutes to use 10 requests/hour
+every 6.minutes do
+  rake "flora:import"
+end
