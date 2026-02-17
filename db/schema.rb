@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_11_192453) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_17_191640) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,6 +23,37 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_11_192453) do
     t.string "unique_identifier"
     t.boolean "active"
     t.index ["country", "province", "city"], name: "index_locations_on_country_province_city", unique: true
+  end
+
+  create_table "plants", force: :cascade do |t|
+    t.integer "api_id", null: false
+    t.string "scientific_name", null: false
+    t.string "family_name"
+    t.string "genus_name"
+    t.string "usda_symbol"
+    t.string "taxonomic_rank"
+    t.string "common_names", default: [], array: true
+    t.string "native_states", default: [], array: true
+    t.string "plant_habits", default: [], array: true
+    t.string "flower_colors", default: [], array: true
+    t.string "leaf_colors", default: [], array: true
+    t.string "bloom_months", default: [], array: true
+    t.string "flowering_seasons", default: [], array: true
+    t.string "light_requirements", default: [], array: true
+    t.string "soil_moisture", default: [], array: true
+    t.string "water_use", default: [], array: true
+    t.string "image_url"
+    t.text "habitat"
+    t.boolean "invasive_alert", default: false, null: false
+    t.boolean "noxious", default: false, null: false
+    t.jsonb "raw_api_payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["api_id"], name: "index_plants_on_api_id", unique: true
+    t.index ["flower_colors"], name: "index_plants_on_flower_colors", using: :gin
+    t.index ["native_states"], name: "index_plants_on_native_states", using: :gin
+    t.index ["plant_habits"], name: "index_plants_on_plant_habits", using: :gin
+    t.index ["scientific_name"], name: "index_plants_on_scientific_name", unique: true
   end
 
   create_table "solid_cable_messages", force: :cascade do |t|
