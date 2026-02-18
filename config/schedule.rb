@@ -19,11 +19,12 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :environment, "development" # or "production"
+set :environment, "production"
 set :output, "log/cron.log"
 
 every 1.year, at: '2:00 am' do
   runner "LocationsImportJob.perform_later"
+  runner "PlantsImportJob.perform_later"
 end
 
 set :output, "log/cron.log"
