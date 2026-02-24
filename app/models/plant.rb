@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: plants
+#
+#  id                 :bigint           not null, primary key
+#  blooming_time      :string
+#  climate            :string
+#  common_name        :string
+#  edible_parts       :string           default([]), is an Array
+#  family             :string
+#  growth_habit       :string
+#  harvest_time       :string
+#  image_url          :string
+#  light_requirements :string
+#  raw_data           :jsonb
+#  scientific_name    :string           not null
+#  style              :string
+#  watering_needs     :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+# Indexes
+#
+#  index_plants_on_scientific_name  (scientific_name) UNIQUE
+#
 class Plant < ApplicationRecord
   has_many :plant_native_regions, dependent: :destroy
   has_many :native_regions,
