@@ -1,4 +1,3 @@
-# app/controllers/garden_plots_controller.rb
 class GardenPlotsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_plot

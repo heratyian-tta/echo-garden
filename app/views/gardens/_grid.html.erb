@@ -1,14 +1,20 @@
-<!-- app/views/gardens/_grid.html.erb -->
 <div class="garden-grid" style="display: grid; grid-template-columns: repeat(<%= garden.columns %>, 1fr); gap: 2px;">
   <% garden.garden_plots.order(:row, :column).each do |plot| %>
     <div
       class="garden-cell"
+      data-plot-id="<%= plot.id %>"
+      data-plant-id="<%= plot.plant_id %>"
       style="background-color: <%= plot.plant ? 'green' : 'brown' %>; 
              width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; position: relative;"
       title="<%= plot.plant ? plot.plant.common_name : 'Empty plot' %>"
     >
       <% if plot.plant %>
-        <span class="plant-tooltip"><%= plot.plant.common_name %></span>
+        <div class="plant-tooltip">
+          <strong><%= plot.plant.common_name %></strong><br>
+          <% if plot.plant.image_url.present? %>
+            <img src="<%= plot.plant.image_url %>" width="80" height="80" alt="<%= plot.plant.common_name %>">
+          <% end %>
+        </div>
       <% end %>
     </div>
   <% end %>
