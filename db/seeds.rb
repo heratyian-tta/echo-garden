@@ -1,14 +1,9 @@
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
 
-# Clear out old sample users if needed
+# Clear out old sample users and gardens if needed
+Garden.destroy_all
 User.destroy_all
 
 # Hard-coded Alice in Wonderland characters
@@ -26,11 +21,10 @@ characters = [
   { first_name: "King", last_name: "Hearts", email: "king.hearts@example.com" }
 ]
 
-# Assign random location from existing locations
 characters.each do |char|
   location = Location.order("RANDOM()").first
 
-  User.create!(
+  user = User.create!(
     first_name: char[:first_name],
     last_name: char[:last_name],
     email: char[:email],
@@ -38,6 +32,14 @@ characters.each do |char|
     password_confirmation: "password123",
     location: location
   )
-end
 
+  # Create two gardens per user
+  2.times do |i|
+    user.gardens.create!(
+      name: "#{char[:first_name]}'s Garden #{i + 1}",
+      rows: rand(5..10),       # random rows between 5 and 10
+      columns: rand(5..10)     # random columns between 5 and 10
+    )
+  end
+end
 puts "Created #{User.count} sample users!"

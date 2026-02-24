@@ -1,4 +1,3 @@
-class DashboardController < ApplicationController
-  def index
-  end
+def index
+  @garden = current_user.favorite_garden
 end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "gardens/index"
+  get "gardens/show"
   devise_for :users
 
   root to: "home#index"
