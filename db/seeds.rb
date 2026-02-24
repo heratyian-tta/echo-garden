@@ -3,22 +3,18 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
 # Clear out old sample users and gardens if needed
+# db/seeds.rb
+
+# Clear old data if needed
+GardenPlot.destroy_all
 Garden.destroy_all
 User.destroy_all
 
-# Hard-coded Alice in Wonderland characters
+# Sample users
 characters = [
   { first_name: "Alice", last_name: "Liddell", email: "alice@example.com" },
   { first_name: "Mad Hatter", last_name: "Hatson", email: "mad.hatter@example.com" },
-  { first_name: "Cheshire", last_name: "Cat", email: "cheshire.cat@example.com" },
-  { first_name: "White", last_name: "Rabbit", email: "white.rabbit@example.com" },
-  { first_name: "Queen", last_name: "Hearts", email: "queen.hearts@example.com" },
-  { first_name: "March", last_name: "Hare", email: "march.hare@example.com" },
-  { first_name: "Tweedle", last_name: "Dee", email: "tweedle.dee@example.com" },
-  { first_name: "Tweedle", last_name: "Dum", email: "tweedle.dum@example.com" },
-  { first_name: "Caterpillar", last_name: "Absolem", email: "caterpillar@example.com" },
-  { first_name: "Dormouse", last_name: "Sleepy", email: "dormouse@example.com" },
-  { first_name: "King", last_name: "Hearts", email: "king.hearts@example.com" }
+  # ... add more
 ]
 
 characters.each do |char|
@@ -33,13 +29,25 @@ characters.each do |char|
     location: location
   )
 
-  # Create two gardens per user
+  # Create 2 gardens per user with different sizes
   2.times do |i|
-    user.gardens.create!(
-      name: "#{char[:first_name]}'s Garden #{i + 1}",
-      rows: rand(5..10),       # random rows between 5 and 10
-      columns: rand(5..10)     # random columns between 5 and 10
+    rows = rand(3..5)
+    columns = rand(3..5)
+    garden = user.gardens.create!(
+      name: "#{user.first_name}'s Garden #{i+1}",
+      rows: rows,
+      columns: columns,
+      favorite: i == 0 # first garden is default favorite
     )
+
+    # Generate plots for each garden
+    rows.times do |r|
+      columns.times do |c|
+        garden.garden_plots.create!(
+          row: r,
+          column: c
+        )
+      end
+    end
   end
 end
-puts "Created #{User.count} sample users!"

@@ -1,7 +1,11 @@
 <h1>Welcome, <%= current_user.first_name %>!</h1>
 
 <h2>Your Favorite Garden</h2>
-<%= render "gardens/grid", garden: @favorite_garden %>
+<% if @favorite_garden %>
+  <%= render partial: "gardens/grid", locals: { garden: @favorite_garden, plots: @garden_plots } %>
+<% else %>
+  <p>You don’t have any gardens yet. <%= link_to "Create your first garden", new_garden_path %></p>
+<% end %>
 
 <h3>All Your Gardens</h3>
 <ul>
