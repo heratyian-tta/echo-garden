@@ -11,7 +11,17 @@ Rails.application.routes.draw do
     resources :garden_plots, only: [:create, :update, :destroy]
   end
 
-  resources :plants, only: [:index, :show]
+  resources :garden_plots, only: [] do
+  member do
+    patch :plant
+  end
+end
+
+  resources :plants, only: [] do
+  collection do
+    get :autocomplete
+  end
+end
 
   resources :locations, only: [:index] do
     get :cities, on: :collection

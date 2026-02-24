@@ -6,48 +6,57 @@
 # db/seeds.rb
 
 # Clear old data if needed
+# Clear out old sample data
 GardenPlot.destroy_all
 Garden.destroy_all
 User.destroy_all
 
-# Sample users
+# Sample Alice in Wonderland–themed users
 characters = [
   { first_name: "Alice", last_name: "Liddell", email: "alice@example.com" },
   { first_name: "Mad Hatter", last_name: "Hatson", email: "mad.hatter@example.com" },
-  # ... add more
+  { first_name: "Cheshire", last_name: "Cat", email: "cheshire.cat@example.com" },
+  { first_name: "White", last_name: "Rabbit", email: "white.rabbit@example.com" },
+  { first_name: "Queen", last_name: "Hearts", email: "queen.hearts@example.com" },
+  { first_name: "March", last_name: "Hare", email: "march.hare@example.com" },
+  { first_name: "Tweedle", last_name: "Dee", email: "tweedle.dee@example.com" },
+  { first_name: "Tweedle", last_name: "Dum", email: "tweedle.dum@example.com" },
+  { first_name: "Caterpillar", last_name: "Absolem", email: "caterpillar@example.com" },
+  { first_name: "Dormouse", last_name: "Sleepy", email: "dormouse@example.com" }
 ]
 
-characters.each do |char|
+users_created = characters.map do |char|
   location = Location.order("RANDOM()").first
-
-  user = User.create!(
+  User.create!(
     first_name: char[:first_name],
     last_name: char[:last_name],
     email: char[:email],
-    password: "password123",
-    password_confirmation: "password123",
+    password: "appdev",
+    password_confirmation: "appdev",
     location: location
   )
+end
 
-  # Create 2 gardens per user with different sizes
-  2.times do |i|
-    rows = rand(3..5)
-    columns = rand(3..5)
+gardens_created = []
+plots_created = []
+
+# Create 1–2 gardens per user, varying the size
+users_created.each do |user|
+  rand(1..2).times do |i|
+    rows = [3, 4, 5, 6, 7].sample   # random number of rows
+    columns = [3, 4, 5, 6, 7].sample # random number of columns
     garden = user.gardens.create!(
-      name: "#{user.first_name}'s Garden #{i+1}",
+      name: "#{user.first_name}'s Garden #{i + 1}",
       rows: rows,
-      columns: columns,
-      favorite: i == 0 # first garden is default favorite
+      columns: columns
     )
-
-    # Generate plots for each garden
-    rows.times do |r|
-      columns.times do |c|
-        garden.garden_plots.create!(
-          row: r,
-          column: c
-        )
-      end
-    end
+    gardens_created << garden
+    plots_created += garden.garden_plots.to_a
   end
 end
+
+
+puts "Seeding complete!"
+puts "Users created: #{users_created.count}"
+puts "Gardens created: #{gardens_created.count}"
+puts "Garden plots created: #{plots_created.count}"

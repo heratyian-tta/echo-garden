@@ -8,8 +8,8 @@
 #  continent         :string
 #  country           :string           not null
 #  province          :string           not null
-#  tdwg_code         :string
 #  unique_identifier :string
+#  wgsrpd_code       :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #

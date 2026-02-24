@@ -10,12 +10,6 @@
  */
 
 @import "custom-image.css";
-
-.navbar-custom {
-  background-color: #e5f7c8; /* your custom green */
-}
-
-.navbar-custom .nav-link,
-.navbar-custom .navbar-brand {
-  color: darkgreen;
-}
+@import "garden_grid";
+@import "garden_plot_modal.css";
+@import "navbar.css";
