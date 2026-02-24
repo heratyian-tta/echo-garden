@@ -4,6 +4,9 @@ class Plant < ApplicationRecord
            through: :plant_native_regions,
            source: :location
 
+  has_many :garden_plots, dependent: :nullify
+  has_many :gardens, through: :garden_plots
+
   validates :scientific_name, presence: true, uniqueness: true
 
   def add_native_region(wgsrpd_code)
