@@ -1,0 +1,38 @@
+<% plants.each do |plant| %>
+  <div
+    class="autocomplete-item"
+    data-action="click->plant-search#select"
+    data-plant-id="<%= plant.id %>"
+    data-plant-name="<%= plant.common_name %>"
+  >
+    <strong><%= plant.common_name %></strong>
+    <small><%= plant.scientific_name %></small>
+  </div>
+<% end %>
+
+<style>
+.plant-search-wrapper {
+  position: relative;
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10000;
+}
+
+.autocomplete-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.autocomplete-item:hover {
+  background: #f3f3f3;
+}
+</style>

@@ -20,6 +20,7 @@ end
   resources :plants, only: [] do
   collection do
     get :autocomplete
+    get :search
   end
 end
 
