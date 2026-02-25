@@ -1,13 +1,15 @@
 <div class="garden-grid" style="display: grid; grid-template-columns: repeat(<%= garden.columns %>, 1fr); gap: 2px;">
+
   <% garden.garden_plots.order(:row, :column).each do |plot| %>
+    <a href="<%= garden_plot_path(plot) %>">
     <div
       class="garden-cell"
-      data-plot-id="<%= plot.id %>"
-      data-plant-id="<%= plot.plant_id %>"
-      style="background-color: <%= plot.plant ? 'green' : 'brown' %>; 
-             width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; position: relative;"
+      style="background-color: <%= plot.plant ? 'green' : 'tan' %>;
+             width: 40px; height: 40px; display: flex;
+             align-items: center; justify-content: center; position: relative;"
       title="<%= plot.plant ? plot.plant.common_name : 'Empty plot' %>"
     >
+
       <% if plot.plant %>
         <div class="plant-tooltip">
           <strong><%= plot.plant.common_name %></strong><br>
@@ -16,7 +18,8 @@
           <% end %>
         </div>
       <% end %>
-    </div>
+
+    </div></a>
   <% end %>
 </div>
 

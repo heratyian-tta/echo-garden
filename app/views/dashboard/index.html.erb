@@ -2,6 +2,7 @@
 
 <h2>Your Favorite Garden</h2>
 <% if @favorite_garden %>
+<h3>Click on a Garden Plot to update it </h3>
   <%= render partial: "gardens/grid", locals: { garden: @favorite_garden, plots: @garden_plots } %>
 <% else %>
   <p>You don’t have any gardens yet. <%= link_to "Create your first garden", new_garden_path %></p>
@@ -16,5 +17,3 @@
     </li>
   <% end %>
 </ul>
-
-

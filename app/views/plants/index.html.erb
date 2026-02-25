@@ -1,0 +1,10 @@
+<h1>Plants Available for My Garden</h1>
+
+<% @plants.each do |plant| %>
+  <div class="plant-card">
+    <h3><%= plant.common_name %></h3>
+    <p><em><%= plant.scientific_name %></em></p>
+    <% end %>
+   <!--button_to "Update", update_garden_plot_path(params[:garden_plot_id], plant_id: plant.id), method: :patch, class: "btn btn-primary" -->
+  </div>
+<% end %>
