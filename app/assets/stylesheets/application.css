@@ -13,3 +13,85 @@
 @import "garden_grid";
 @import "garden_plot_modal.css";
 @import "navbar.css";
+
+:root {
+  /* Navbar colors */
+  --navbar-bg: #e5f7c8;
+  --navbar-text: darkgreen;
+
+  /* Primary brand color (for buttons, highlights) */
+  --theme-primary: darkgreen;   /* matches navbar text */
+  --theme-primary-light: #c9e7b4; /* lighter green for hover or backgrounds */
+
+  /* Secondary color (contrast) */
+  --theme-secondary: #ffffff;  /* white text on primary buttons */
+
+  /* Accent color */
+  --theme-accent: #f0ad4e;    /* golden accent for highlights, stars, badges */
+  --theme-accent-dark: #e6952c;
+}
+
+/* Primary button (green) */
+.btn-primary {
+  background-color: var(--theme-primary);
+  border-color: var(--theme-primary);
+  color: var(--theme-secondary);
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--theme-primary-light);
+  border-color: var(--theme-primary-light);
+  color: var(--theme-primary);
+}
+
+/* Secondary button (white with green text) */
+.btn-secondary {
+  background-color: var(--theme-secondary);
+  border-color: var(--theme-primary);
+  color: var(--theme-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--theme-primary);
+  color: var(--theme-secondary);
+}
+
+/* Page sections */
+.bg-theme-light {
+  background-color: var(--theme-primary-light);
+  color: var(--theme-primary);
+}
+
+.bg-theme-dark {
+  background-color: var(--theme-primary);
+  color: var(--theme-secondary);
+}
+
+/* Cards */
+.card-theme {
+  background-color: var(--theme-primary-light);
+  border: 1px solid var(--theme-primary);
+  color: var(--theme-primary);
+}
+
+.card-theme:hover {
+  background-color: var(--theme-primary);
+  color: var(--theme-secondary);
+}
+
+a {
+  color: var(--theme-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--theme-accent-dark);
+  text-decoration: underline;
+}
+
+.text-theme-primary { color: var(--theme-primary) !important; }
+.text-theme-accent { color: var(--theme-accent) !important; }
+.bg-theme-primary { background-color: var(--theme-primary) !important; color: var(--theme-secondary); }
+.bg-theme-light { background-color: var(--theme-primary-light) !important; color: var(--theme-primary); }

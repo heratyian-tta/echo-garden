@@ -9,7 +9,7 @@
 <% end %>
 
 <h3>All Your Gardens</h3>
-<ul>
+<ul style="list-style: none; padding-left: 0;">
   <% @gardens.each do |garden| %>
     <li>
       <%= link_to garden.name, garden_path(garden) %>

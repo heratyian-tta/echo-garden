@@ -24,7 +24,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <header>
       <%= render "shared/navbar" %>
       <div>
@@ -32,11 +32,16 @@
       </div>
     </header>
 
-    <main>
-      <%= yield %>
-    </main>
+    <div class="container text-center flex-grow-1">
+    <%= yield %>
+  </div>
 
-    <footer>
-    </footer>
+   <footer class="bg-dark text-white text-center py-4 mt-auto">
+    <p class="mb-0">&copy; <%= Time.current.year %> EchoGarden. All rights reserved.</p>
+
+    <% if user_signed_in? %>
+      <%= link_to "Feedback", "https://www.surveymonkey.com/r/JZQM2XX", class: "text-white ms-3" %>
+    <% end %>
+  </footer>
   </body>
 </html>
