@@ -1,0 +1,45 @@
+<h2>Sign Up</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <div class="mb-3">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: "form-control", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control", required: true, autocomplete: "new-password" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: "form-control", required: true, autocomplete: "new-password" %>
+    </div>
+
+    <%# -- Render the location dropdown partial -- %>
+    <%= render "users/location_fields", f: f, user: resource %>
+
+  </div>
+
+  <div class="form-actions mt-3">
+    <%= f.submit "Sign Up", class: "btn btn-primary" %>
+  </div>
+
+<% end %>
+
+<%= render "devise/shared/links" %>
+

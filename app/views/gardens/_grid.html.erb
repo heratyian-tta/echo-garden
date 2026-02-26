@@ -1,0 +1,52 @@
+<div class="garden-grid" style="display: grid; grid-template-columns: repeat(<%= garden.columns %>, 41px); gap: 1px; justify-content: center;">
+
+  <% garden.garden_plots.order(:row, :column).each do |plot| %>
+    <a href="<%= garden_plot_path(plot) %>">
+      <div
+        class="garden-cell"
+        style="background-color: <%= plot.plant ? 'green' : 'tan' %>;
+               width: 40px; height: 40px; display: flex;
+               align-items: center; justify-content: center; position: relative;"
+        title="<%= plot.plant ? plot.plant.common_name : 'Empty plot' %>"
+      >
+
+        <% if plot.plant %>
+          <div class="plant-tooltip">
+            <strong><%= plot.plant.common_name %></strong><br>
+            <% if plot.plant.image_url.present? %>
+              <img src="<%= plot.plant.image_url %>" width="80" height="80" alt="<%= plot.plant.common_name %>">
+            <% end %>
+          </div>
+        <% end %>
+
+      </div>
+    </a>
+  <% end %>
+</div>
+
+<style>
+  .garden-cell {
+    border: 1px solid #555; /* optional: reduce to 0.5px for even tighter */
+    cursor: pointer;
+    box-sizing: border-box; /* ensures borders don’t increase spacing */
+  }
+
+  .garden-cell:hover .plant-tooltip {
+    display: block;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0.8);
+    color: #fff;
+    padding: 2px 6px;
+    font-size: 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  .plant-tooltip {
+    display: none;
+  }
+</style>

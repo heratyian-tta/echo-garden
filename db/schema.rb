@@ -10,9 +10,73 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_13_202311) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_24_185016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "garden_plots", force: :cascade do |t|
+    t.bigint "garden_id"
+    t.bigint "plant_id"
+    t.integer "row"
+    t.integer "column"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "sunlight"
+    t.index ["garden_id"], name: "index_garden_plots_on_garden_id"
+    t.index ["plant_id"], name: "index_garden_plots_on_plant_id"
+  end
+
+  create_table "gardens", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.integer "rows"
+    t.integer "columns"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "favorite", default: false, null: false
+    t.index ["user_id"], name: "index_gardens_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "country", null: false
+    t.string "province", null: false
+    t.string "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "unique_identifier"
+    t.boolean "active"
+    t.string "continent"
+    t.string "wgsrpd_code"
+    t.index ["country", "province", "city"], name: "index_locations_on_country_province_city", unique: true
+  end
+
+  create_table "plant_native_regions", force: :cascade do |t|
+    t.bigint "plant_id"
+    t.string "wgsrpd_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plant_id"], name: "index_plant_native_regions_on_plant_id"
+    t.index ["wgsrpd_code"], name: "index_plant_native_regions_on_wgsrpd_code"
+  end
+
+  create_table "plants", force: :cascade do |t|
+    t.string "common_name"
+    t.string "scientific_name", null: false
+    t.string "family"
+    t.string "growth_habit"
+    t.string "light_requirements"
+    t.string "blooming_time"
+    t.string "harvest_time"
+    t.string "climate"
+    t.string "watering_needs"
+    t.string "image_url"
+    t.string "edible_parts", default: [], array: true
+    t.jsonb "raw_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "style"
+    t.index ["scientific_name"], name: "index_plants_on_scientific_name", unique: true
+  end
 
   create_table "solid_cable_messages", force: :cascade do |t|
     t.binary "channel", null: false
@@ -156,10 +220,31 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_13_202311) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["location_id"], name: "index_users_on_location_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "garden_plots", "gardens"
+  add_foreign_key "garden_plots", "plants"
+  add_foreign_key "gardens", "users"
+  add_foreign_key "plant_native_regions", "plants"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "users", "locations"
 end

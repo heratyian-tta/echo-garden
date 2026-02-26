@@ -8,6 +8,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= render "shared/bootstrap_assets" %>
+
     <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
@@ -22,7 +24,24 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
+    <header>
+      <%= render "shared/navbar" %>
+      <div>
+        <%= render "shared/flash_messages" %>
+      </div>
+    </header>
+
+    <div class="container text-center flex-grow-1">
     <%= yield %>
+  </div>
+
+   <footer class="bg-dark text-white text-center py-4 mt-auto">
+    <p class="mb-0">&copy; <%= Time.current.year %> EchoGarden. All rights reserved.</p>
+
+    <% if user_signed_in? %>
+      <%= link_to "Feedback", "https://www.surveymonkey.com/r/JZQM2XX", class: "text-white ms-3" %>
+    <% end %>
+  </footer>
   </body>
 </html>

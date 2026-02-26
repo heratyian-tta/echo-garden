@@ -1,0 +1,21 @@
+<% if @plot.plant.present? %>
+  <h2>Current Plant:</h2>
+  <p><%= @plot.plant.common_name %></p>
+  <p><em>(<%= @plot.plant.scientific_name %>)</em></p>
+  <img src="<%= @plot.plant.image_url %>" alt="<%= @plot.plant.common_name %>" width="150" height="150">
+  <%= button_to "Return to Garden", garden_path(@plot.garden), method: :get, class: "btn btn-primary" %>
+<% else %>
+  <p>No plant assigned yet.</p>
+
+<h2>Choose a Plant:</h2>
+
+<% @plants.each do |plant| %>
+  <p>
+    <%= plant.common_name %>
+    <%= plant.scientific_name %>
+    <%= button_to "Assign Plant",
+        plant_garden_plot_path(@plot, plant_id: plant.id),
+        method: :patch %>
+  </p>
+  <% end %>
+<% end %>

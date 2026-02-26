@@ -1,0 +1,11 @@
+<h1>Edit Garden Plot</h1>
+<%= form_with model: @garden_plot, url: plant_garden_plot_path(@garden_plot), method: :patch, local: true do |form| %>
+  <div class="field">
+    <%= form.label :plant_id, "Select a Plant" %><br>
+    <%= form.collection_select :plant_id, Plant.all, :id, :common_name, prompt: "Choose a plant" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Update Plot" %>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+<h1>Plants Available for My Garden</h1>
+
+<% @plants.each do |plant| %>
+  <p><%= plant.common_name %></p>
+  <p><%= plant.scientific_name %></p>
+  <%= button_to "Add Plant", plant_garden_plot_path(@plot, plant_id: plant.id), method: :patch %>
+<% end %>
+<% end %>
