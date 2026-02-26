@@ -23,8 +23,9 @@
 #
 # app/models/garden_plot.rb
 class GardenPlot < ApplicationRecord
-  belongs_to :garden
   belongs_to :plant, optional: true
+  belongs_to :garden
+  
 
   validates :row, :column, presence: true
 

@@ -3,6 +3,7 @@ class PlantsController < ApplicationController
 
   def index
     @plants = Plant.all
+    @garden_plot_id = params[:garden_plot_id]
   end 
 
   

@@ -24,11 +24,13 @@
 #  index_plants_on_scientific_name  (scientific_name) UNIQUE
 #
 class Plant < ApplicationRecord
+  # Native regions relationship
   has_many :plant_native_regions, dependent: :destroy
   has_many :native_regions,
            through: :plant_native_regions,
            source: :location
 
+  # Garden relationships
   has_many :garden_plots, dependent: :nullify
   has_many :gardens, through: :garden_plots
 

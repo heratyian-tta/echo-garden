@@ -18,9 +18,14 @@ class GardenPlotsController < ApplicationController
   end
 
   def show
-    @garden_plot = GardenPlot.find(params[:id])
-
-    @plant = @garden_plot.plant
-
+    @plot = GardenPlot.find(params[:id])
+    @plants = Plant.all
   end 
+
+  def plant
+    @plot = GardenPlot.find(params[:id])
+    @plot.update(plant_id: params[:plant_id])
+
+    redirect_to @plot, notice: "Plant added to the garden plot!"
+  end
 end
