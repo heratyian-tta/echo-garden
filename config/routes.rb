@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   get "gardens/index"
   get "gardens/show"
-  devise_for :users
+  
+  devise_for :users, controllers: {
+  sessions: "users/sessions"
+}
 
   root to: "home#index"
 
-  get "dashboard", to: "dashboard#index"
+  resources :dashboard, only: [:index]
 
   resources :gardens do
     resources :garden_plots, only: [:create, :update, :destroy]

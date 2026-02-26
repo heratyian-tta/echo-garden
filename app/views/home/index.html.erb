@@ -1,3 +1,77 @@
-Howdy!
+<!-- Hero Section -->
+<section class="bg-light text-dark text-center py-5" style="background-image: url(<%= asset_path('hero-bg.jpg') %>); background-size: cover; background-position: center;">
+  <div class="container">
+    <h1 class="display-4 fw-bold">Grow Your Dream Garden with Ease</h1>
+    <p class="lead mb-4">Plan, track, and optimize your garden plots and plants — all in one app.</p>
+    <%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+  </div>
+</section>
 
-General Information about the app goes here
+<!-- Features Section -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-5">Key Features</h2>
+    <div class="row text-center g-4">
+      <div class="col-md-4">
+        <i class="bi bi-grid-1x2-fill display-4 text-primary mb-3"></i>
+        <h3>Plan Your Garden</h3>
+        <p>Create and organize plots visually with intuitive tools.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-droplet-fill display-4 text-primary mb-3"></i>
+        <h3>Track Plant Growth</h3>
+        <p>Monitor watering, sunlight, and bloom cycles for each plant.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-bar-chart-fill display-4 text-primary mb-3"></i>
+        <h3>Analyze & Optimize</h3>
+        <p>Get insights to maximize your garden’s health and yield.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Demo Video Section -->
+<section class="bg-light py-5">
+  <div class="container text-center">
+    <h2 class="mb-4">See It in Action</h2>
+    <video autoplay muted loop playsinline style="max-width: 100%; border-radius: 8px;">
+      <source src="<%= asset_path('demo.mp4') %>" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-5">
+  <div class="container text-center">
+    <h2 class="mb-5">What Our Users Say</h2>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4">
+        <blockquote class="blockquote">
+          <p>"EchoGarden transformed the way I manage my backyard garden. Highly recommend!"</p>
+          <footer class="blockquote-footer">Jane D.</footer>
+        </blockquote>
+      </div>
+      <div class="col-md-4">
+        <blockquote class="blockquote">
+          <p>"Perfect for hobby gardeners looking to track their plants efficiently."</p>
+          <footer class="blockquote-footer">Mark T.</footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="text-center py-5" style="background-color: #2C7A7B; color: #fff;">
+  <div class="container">
+    <h2 class="mb-4">Ready to Grow Your Garden?</h2>
+    <%= link_to "Get Started Now", new_user_registration_path, class: "btn btn-light btn-lg" %>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-4">
+  <p class="mb-0">&copy; <%= Time.current.year %> EchoGarden. All rights reserved.</p>
+</footer>
